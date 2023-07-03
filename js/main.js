@@ -1,3 +1,5 @@
+// Global
+var dsnv = new DSNV();
 function getEle(id) {
     return document.getElementById(id);
 };
@@ -15,7 +17,7 @@ function layThongTinNV(){
     
     //Tạo đối tượng nv từ lớp đối tượng NhanVien
     var nv = new NhanVien(taiKhoan, hoTen, email, matKhau, ngayLam, luongCoBan, chucVu, gioLamTrongNgay);
-
+    // console.log(nv);
     // nv.xepLoaiNV();
 
     // console.log("123");
@@ -35,7 +37,13 @@ function renderTable(data){
                 <td>${nv.ngayLam}</td>
                 <td>${nv.chucVu}</td>
             </tr>
-    `
+        `;
     }
     getEle("tableDanhSach").innerHTML = content;
+}
+
+function themNhanVien(){
+    var nv = layThongTinNV();
+    dsnv.themNV(nv);
+    renderTable(dsnv.arr);
 }
