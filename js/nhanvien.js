@@ -1,4 +1,4 @@
-function NhanVien (_taiKhoan, _hoTen, _email, _matKhau, _ngayLam, _luongCoBan, _chucVu, _gioLamTrongNgay){
+function NhanVien (_taiKhoan, _hoTen, _email, _matKhau, _ngayLam, _luongCoBan, _chucVu, _gioLamTrongThang){
     // Properties
     this.taiKhoan = _taiKhoan;
     this.hoTen = _hoTen;
@@ -7,7 +7,7 @@ function NhanVien (_taiKhoan, _hoTen, _email, _matKhau, _ngayLam, _luongCoBan, _
     this.ngayLam = _ngayLam;
     this.luongCoBan = _luongCoBan;
     this.chucVu = _chucVu;
-    this.gioLamTrongNgay = _gioLamTrongNgay;
+    this.gioLamTrongThang = _gioLamTrongThang;
     this.tongLuong = 0;
     this.loaiNV = "";
 
@@ -16,17 +16,28 @@ function NhanVien (_taiKhoan, _hoTen, _email, _matKhau, _ngayLam, _luongCoBan, _
     //     this.
     // };
     this.xepLoaiNV = function(){
-        if (this.gioLamTrongNgay * this.ngayLam >= 192){
+        if (this.gioLamTrongThang >= 192){
             this.loaiNV = "Nhân viên xuất sắc";
         }
-        else if (this.gioLamTrongNgay * this.ngayLam >= 176){
+        else if (this.gioLamTrongThang >= 176){
             this.loaiNV = "Nhân viên giỏi";
         }
-        else if (this.gioLamTrongNgay * this.ngayLam >= 160){
+        else if (this.gioLamTrongThang >= 160){
             this.loaiNV = "Nhân viên khá";
         }
         else {
             this.loaiNV = "Nhân viên trung bình";
         }
     };
+    this.tinhTongLuong = function(){
+        if (this.chucVu == "Sếp"){
+            this.tongLuong = this.luongCoBan * 3;
+        }
+        else if (this.chucVu == "Trưởng phòng"){
+            this.tongLuong = this.luongCoBan * 2;
+        }
+        else if (this.chucVu == "Nhân viên"){
+            this.tongLuong = this.luongCoBan * 1;
+        }
+    }
 }
