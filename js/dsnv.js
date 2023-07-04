@@ -5,6 +5,7 @@ function DSNV(){
     this.themNV = function(nv){
         this.arr.push(nv);
     };
+    
     this._timViTri = function (taiKhoan){
         var index = -1;
         for (var i =0; i < this.arr.length; i++){
@@ -17,6 +18,26 @@ function DSNV(){
         return index;
     }
 
+    // Lấy thông tin chi tiết của nhân viên
+    this.layThongTinChiTietNV = function (taiKhoan){
+        // tìm vị trí
+        var index = this._timViTri(taiKhoan);
+
+        if (index !== -1){
+            var nv = this.arr[index];
+            return nv;
+        }
+    } 
+
+    // Cập nhật nhân viên
+    this.capNhatNV = function (nv){
+        var index = this._timViTri(nv);
+        if (index !== -1){
+            this.arr[index] = sv;
+        }
+    }
+
+    // Xóa nhân viên
     this._xoaNV = function(taiKhoan){
         var index = this._timViTri(taiKhoan);
         if(index !== -1){

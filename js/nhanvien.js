@@ -11,10 +11,6 @@ function NhanVien (_taiKhoan, _hoTen, _email, _matKhau, _ngayLam, _luongCoBan, _
     this.tongLuong = 0;
     this.loaiNV = "";
 
-    //Methods
-    // this.tongLuong = function(){
-    //     this.
-    // };
     this.xepLoaiNV = function(){
         if (this.gioLamTrongThang >= 192){
             this.loaiNV = "Nhân viên xuất sắc";
@@ -29,6 +25,7 @@ function NhanVien (_taiKhoan, _hoTen, _email, _matKhau, _ngayLam, _luongCoBan, _
             this.loaiNV = "Nhân viên trung bình";
         }
     };
+    
     this.tinhTongLuong = function(){
         if (this.chucVu == "Sếp"){
             this.tongLuong = this.luongCoBan * 3;

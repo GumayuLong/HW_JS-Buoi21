@@ -6,6 +6,7 @@ function getEle(id) {
     return document.getElementById(id);
 };
 
+//Lấy thông tin nhân viên
 function layThongTinNV(){
     // Dom lay thong tin tu cac input
     var taiKhoan = getEle("tknv").value;
@@ -24,6 +25,7 @@ function layThongTinNV(){
     return nv;
 };
 
+// In ra table
 function renderTable(data){
     var content = "";
     for (var i = 0; i<data.length; i++){
@@ -39,19 +41,12 @@ function renderTable(data){
                 <td>${nv.loaiNV}</td>
                 <td>
                     <button class="btn btn-danger" onclick="xoaNV('${nv.taiKhoan}')">Xóa</button>
-                    <button class="btn btn-info">Sửa</button>
+                    <button class="btn btn-info" onclick="suaNV('${nv.taiKhoan}')">Sửa</button>
                 </td>
             </tr>
         `;
     }
     getEle("tableDanhSach").innerHTML = content;
-}
-
-function themNhanVien(){
-    var nv = layThongTinNV();
-    dsnv.themNV(nv);
-    renderTable(dsnv.arr);
-    setLocalStorage();
 }
 
 function getlocalStorage(){
@@ -67,8 +62,43 @@ function setLocalStorage(){
     localStorage.setItem("DSNV", dataString);
 }
 
+// Thêm nhân viên
+function themNhanVien() {
+	var nv = layThongTinNV();
+	dsnv.themNV(nv);
+	renderTable(dsnv.arr);
+	setLocalStorage();
+}
+
+// Xóa nhân viên
 function xoaNV(taiKhoan){
     dsnv._xoaNV(taiKhoan);
     renderTable(dsnv.arr);
     setLocalStorage();
 }
+
+// Sửa nhân viên
+function suaNV(taiKhoan){
+    var nv = dsnv.layThongTinChiTietNV(taiKhoan);
+    if (nv){
+        getEle("tknv").value = nv.taiKhoan;
+        getEle("tknv").disabled = true;
+		getEle("name").value = nv.hoTen;
+		getEle("email").value = nv.email;
+		getEle("password").value = nv.matKhau;
+		getEle("datepicker").value = nv.ngayLam;
+		getEle("luongCB").value = nv.luongCoBan;
+		getEle("chucvu").value = nv.chucVu;
+		getEle("gioLam").value = nv.gioLamTrongThang;
+        getEle("btnCapNhat").style.display = "inline-block";
+        getEle("btnThemNV").style.display = "none";
+    }
+}
+
+// Cập nhật chỉnh sửa
+getEle("btnCapNhat").onclick = function(){
+    var nv = layThongTinNV();
+    dsnv.capNhatNV(nv);
+    renderTable(dsnv.arr);
+    setLocalStorage();
+};
