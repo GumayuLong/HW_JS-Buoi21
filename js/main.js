@@ -18,23 +18,26 @@ function layThongTinNV(isAdd){
     var luongCoBan = getEle("luongCB").value;
     var chucVu = getEle("chucvu").value;
     var gioLamTrongThang = getEle("gioLam").value;
-    // var myModal = getEle("myModal").value;
 
     var isValid = true;
 
-    if (isAdd){
         // add nv
         //Validation taiKhoan
         isValid &=
             validation.kiemTraRong(taiKhoan, "tbTKNV", "(*) Vui lòng nhập tài khoản") 
-            // &&
-            // validation.kiemTraDoDaiKiTu(
-            //     taiKhoan,
-            //     "tbTKNV",
-            //     "(*) Vui long nhap ki tu 4 - 6",
-            //     4,
-            //     6
-            // )
+            &&
+            validation.kiemTraDoDaiKiTu(
+                taiKhoan,
+                "tbTKNV",
+                "(*) Vui lòng nhập độ dài kí tự số 4 - 6",
+                4,
+                6
+            ) &&
+            validation.kiemTraChuoiKiTuSo(
+                taiKhoan,
+                "tbTKNV",
+                "(*) Vui nhập kí tự số",
+            )
             &&
             validation.kiemTraTaiKhoanNVTonTai(
                 taiKhoan,
@@ -42,7 +45,6 @@ function layThongTinNV(isAdd){
                 "(*) Tài khoản đã tồn tại",
                 dsnv.arr
             );
-    }
 
     // Validation hoTen
     isValid &=

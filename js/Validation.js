@@ -84,6 +84,24 @@ function Validation() {
     
         return false;
         };
+
+    this.kiemTraChuoiKiTuSo = function (value, errorId, mess) {
+        var letter = "^[0-9]+$";
+
+        if (value.match(letter)) {
+            //true
+            getEle(errorId).innerHTML = "";
+            getEle(errorId).style.display = "none";
+    
+            return true;
+        }
+
+      //false
+        getEle(errorId).innerHTML = mess;
+        getEle(errorId).style.display = "block";
+    
+        return false;
+        };
     
         this.checkPattern = function (value, errorId, mess, letter) {
         if (value.match(letter)) {
