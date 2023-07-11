@@ -2,12 +2,14 @@ function DSNV(){
     //Properties
     //Chứa các đối tượng nhân viên bên trong nhanvien.js
     this.arr = [];
+
     this.themNV = function(nv){
         this.arr.push(nv);
     };
     
     this._timViTri = function (taiKhoan){
         var index = -1;
+
         for (var i =0; i < this.arr.length; i++){
             var nv = this.arr[i];
             if (nv.taiKhoan === taiKhoan){
@@ -31,9 +33,11 @@ function DSNV(){
 
     // Cập nhật nhân viên
     this.capNhatNV = function (nv){
-        var index = this._timViTri(nv);
+        document.getElementById("tbTKNV").style.display = "none";
+        document.getElementById("tbTKNV").innerHTML = "";
+        var index = this._timViTri(nv.taiKhoan);
         if (index !== -1){
-            this.arr[index] = sv;
+            this.arr[index] = nv;
         }
     }
 
@@ -45,3 +49,21 @@ function DSNV(){
         }
     }
 }
+
+DSNV.prototype.timKiemNV = function (keyword) {
+        
+        var mangTimKiem = [];
+    
+        for (var i = 0; i < this.arr.length; i++) {
+        var nv = this.arr[i];
+        //keyword => convert chữ thường
+        var keywordLowerCase = keyword.toLowerCase();
+        //sv.tenSV => convert chữ thường
+        var xepLoaiNVLowerCase = nv.loaiNV.toLowerCase();
+        if (xepLoaiNVLowerCase.indexOf(keywordLowerCase) !== -1) {
+            mangTimKiem.push(nv);
+        }
+        }
+    
+        return mangTimKiem;
+    };
