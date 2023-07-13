@@ -23,7 +23,9 @@ function layThongTinNV(isAdd){
 
         // add nv
         //Validation taiKhoan
-        isValid &=
+
+        if (isAdd){
+            isValid &=
             validation.kiemTraRong(taiKhoan, "tbTKNV", "(*) Vui lòng nhập tài khoản") 
             &&
             validation.kiemTraDoDaiKiTu(
@@ -45,6 +47,8 @@ function layThongTinNV(isAdd){
                 "(*) Tài khoản đã tồn tại",
                 dsnv.arr
             );
+        }
+        
 
     // Validation hoTen
     isValid &=
@@ -171,7 +175,7 @@ function renderTable(data){
 
 // Thêm nhân viên
 function themNhanVien() {
-	var nv = layThongTinNV();
+	var nv = layThongTinNV(true);
 	dsnv.themNV(nv);
 	renderTable(dsnv.arr);
 	setLocalStorage();
